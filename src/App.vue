@@ -1,12 +1,18 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 
 import { ref, onMounted } from 'vue'
 
 // reactive state
 const count = ref(220)
 
+const people = [
+  { name: "morteza", lastname: 'soltanpour' },
+  { name: "ali", lastname: 'mirzaei' },
+  { name: "masoud", lastname: 'hamidi' },
+  { name: "amir", lastname: 'alavi' },
+  { name: "hasan", lastname: 'rezaei' }
+
+]
 
 // functions that mutate state and trigger updates
 function increment() {
@@ -48,19 +54,33 @@ export default {
  
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="نصب کامل شد" />
+
       {{ count }}
-      <button @click="increment" >Click here</button>
-      <button @click="count--" >Click for minus</button>
+      <button @click="increment">Click here</button>
+      <button @click="count--">Click for minus</button>
     </div>
   </header>
-
   <main>
-    <TheWelcome />
+    <div>
+      <ul>
+        <li v-for="(person, index) in people" :key="person.name">
+          <span style="font-weight: 700;" v-if="person.name == 'morteza'">
+            {{ index }} ) {{ person.name.toUpperCase() }} {{ person.lastname }}
+          </span>
+          <span v-else>{{ index }} ) {{ person.name }} {{ person.lastname }}
+          </span>
+        </li>
+
+
+      </ul>
+    </div>
   </main>
+
+  <div v-pre>
+    {{ count }}
+  </div>
 </template>
 
 <style scoped>
